@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>袁鑫杰 · 把 AI 变成工作方式的人</title>
+<style>
+  /* ═══ 设计 Token：暖色人文 ═══ */
+  :root {
+    --bg: #FAF6F0;
+    --card: #FFFDF9;
+    --ink: #3A332C;
+    --ink-soft: #6E6357;
+    --ink-faint: #9A8F81;
+    --accent: #C4532F;          /* 陶土橙 */
+    --accent-soft: #F6E7DC;
+    --gold: #E8A33D;
+    --line: #EDE3D6;
+    --radius: 20px;
+    --shadow: 0 2px 12px rgba(58, 51, 44, 0.06), 0 12px 32px rgba(58, 51, 44, 0.05);
+    --shadow-hover: 0 4px 16px rgba(58, 51, 44, 0.10), 0 16px 40px rgba(58, 51, 44, 0.09);
+    --font-serif: "Songti SC", "STSong", "SimSun", serif;
+    --font-body: "PingFang SC", -apple-system, "Helvetica Neue", sans-serif;
+    --font-hand: "Kaiti SC", "STKaiti", "KaiTi", cursive;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 1.75;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: 960px; margin: 0 auto; padding: 0 24px; }
+
+  /* ═══ 通用排版 ═══ */
+  h1, h2, h3 { font-family: var(--font-serif); text-wrap: balance; }
+  p { text-wrap: pretty; }
+  section { padding: 64px 0 8px; }
+  .kicker {
+    font-family: var(--font-hand);
+    color: var(--accent);
+    font-size: 15px;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+  }
+  .sec-title { font-size: 30px; font-weight: 700; letter-spacing: 0.5px; margin-bottom: 12px; }
+  .squiggle { display: block; margin: 4px 0 28px; }
+  .squiggle path { stroke-dasharray: 90; stroke-dashoffset: 90; }
+  .on .squiggle path { animation: draw 0.9s ease-out forwards 0.15s; }
+  @keyframes draw { to { stroke-dashoffset: 0; } }
+  .card {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 26px;
+    transition: transform 0.18s ease-out, box-shadow 0.18s ease-out, border-color 0.18s ease-out;
+  }
+  .card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-hover);
+    border-color: rgba(196, 83, 47, 0.45);
+  }
+
+  /* ═══ Hero ═══ */
+  .hero { padding: 88px 0 16px; text-align: center; }
+  .hero-photo {
+    width: 148px; height: 148px;
+    margin: 0 auto 28px;
+    border-radius: 50%;
+    background: #EDE8E0;
+    overflow: hidden;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--ink-faint);
+    font-size: 13px;
+    font-family: var(--font-hand);
+  }
+  .hero-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .hero h1 { font-size: 44px; font-weight: 900; letter-spacing: 1px; line-height: 1.3; }
+  .hero h1 .hl { color: var(--accent); white-space: nowrap; }
+  .hero .sub { margin-top: 14px; color: var(--ink-soft); font-size: 17px; }
+  .hero .hand-note {
+    margin-top: 22px;
+    font-family: var(--font-hand);
+    color: var(--ink-faint);
+    font-size: 15px;
+  }
+
+  /* ═══ 简介 ═══ */
+  .intro-list { list-style: none; }
+  .intro-list li { padding: 10px 0 10px 26px; position: relative; color: var(--ink-soft); }
+  .intro-list li::before {
+    content: "";
+    position: absolute; left: 2px; top: 20px;
+    width: 12px; height: 12px;
+    border-radius: 4px;
+    background: var(--accent-soft);
+    border: 2px solid var(--accent);
+    transform: rotate(45deg) scale(0.7);
+  }
+  .intro-list li b { color: var(--ink); font-weight: 600; }
+
+  /* ═══ 实践卡片（不对称双列）═══ */
+  .grid { display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 16px; }
+  .practice-card {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 22px;
+    transition: transform 0.18s ease-out, box-shadow 0.18s ease-out, border-color 0.18s ease-out;
+  }
+  .practice-card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-hover);
+    border-color: rgba(196, 83, 47, 0.45);
+  }
+  .practice-card .num {
+    font-family: var(--font-serif);
+    font-size: 13px;
+    color: var(--accent);
+    letter-spacing: 1px;
+  }
+  .practice-card h3 { font-size: 18px; margin: 6px 0 8px; }
+  .practice-card p { font-size: 14px; color: var(--ink-soft); line-height: 1.7; }
+
+  /* ═══ 教练区 ═══ */
+  .coach-grid { display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 16px; }
+  .mini-card {
+    background: var(--accent-soft);
+    border: none;
+    border-radius: var(--radius);
+    padding: 20px 22px;
+    box-shadow: none;
+    transition: transform 0.18s ease-out;
+  }
+  .mini-card:hover { transform: translateY(-3px); }
+  .mini-card h4 { font-family: var(--font-serif); font-size: 15px; margin-bottom: 6px; }
+  .mini-card p { font-size: 13.5px; color: var(--ink-soft); line-height: 1.7; }
+  .mini-card .formula {
+    font-family: var(--font-serif);
+    font-size: 15px;
+    color: var(--accent);
+    font-weight: 700;
+  }
+  .steps { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 8px; }
+  .steps span {
+    font-size: 12.5px;
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 3px 12px;
+    color: var(--ink-soft);
+  }
+
+  /* ═══ 分享记录（折叠卡片）═══ */
+  details.share-item {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    margin-bottom: 14px;
+    overflow: hidden;
+    transition: border-color 0.18s ease-out, box-shadow 0.18s ease-out;
+  }
+  details.share-item:hover { border-color: rgba(196, 83, 47, 0.45); box-shadow: var(--shadow-hover); }
+  details.share-item summary {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 20px 24px;
+    cursor: pointer;
+  }
+  details.share-item summary::-webkit-details-marker { display: none; }
+  details.share-item summary:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: -2px;
+    border-radius: var(--radius);
+  }
+  .share-item .arrow {
+    margin-left: auto;
+    color: var(--accent);
+    font-size: 14px;
+    transition: transform 0.2s ease-out;
+    flex-shrink: 0;
+  }
+  details.share-item[open] .arrow { transform: rotate(90deg); }
+  .share-item .t h3 { font-size: 17px; }
+  .share-item .t .meta { font-size: 13px; color: var(--ink-faint); margin-top: 2px; }
+  .share-body {
+    padding: 0 24px 22px;
+    animation: share-open 0.25s ease-out;
+  }
+  @keyframes share-open {
+    from { opacity: 0; transform: translateY(-6px); }
+    to { opacity: 1; transform: none; }
+  }
+  .share-body .desc { font-size: 14px; color: var(--ink-soft); margin-bottom: 12px; }
+  .tl-photo {
+    border-radius: 14px;
+    background: #EDE8E0;
+    overflow: hidden;
+  }
+  .tl-photo img {
+    width: 100%; height: auto;
+    object-fit: contain;
+    border-radius: 12px;
+    display: block;
+    cursor: zoom-in;
+    transition: opacity 0.18s ease-out;
+  }
+  .tl-photo img:hover { opacity: 0.9; }
+  .tl-photo.single-center { width: 55%; margin: 12px auto 0; }
+
+  /* ═══ 反馈区 ═══ */
+  .rating-row { display: flex; align-items: center; gap: 12px; padding: 8px 0; }
+  .rating-row .label { width: 64px; font-size: 14px; color: var(--ink-soft); flex-shrink: 0; }
+  .rating-row .stars { color: var(--gold); font-size: 16px; letter-spacing: 2px; }
+  .rating-row .score { font-size: 13px; color: var(--ink-faint); font-variant-numeric: tabular-nums; margin-left: auto; }
+  .quote-list { margin-top: 18px; display: grid; gap: 10px; }
+  .quote {
+    background: var(--bg);
+    border-radius: 14px;
+    padding: 14px 18px;
+    color: var(--ink-soft);
+    font-family: var(--font-hand);
+    font-size: 15px;
+  }
+  .quote::before { content: "「 "; color: var(--accent); }
+  .quote::after { content: " 」"; color: var(--accent); }
+  .fav-tags { margin-top: 16px; display: flex; flex-wrap: wrap; gap: 8px; }
+  .fav-tags span {
+    font-size: 12.5px;
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 4px 14px;
+    color: var(--ink-soft);
+  }
+  .fav-title { font-size: 13px; color: var(--ink-faint); margin-top: 20px; margin-bottom: 4px; }
+
+  /* ═══ Coming Soon / CTA ═══ */
+  .soon-card {
+    border: 2px dashed #CFC6B8;
+    background: transparent;
+    box-shadow: none;
+    text-align: center;
+    padding: 34px 24px;
+  }
+  .soon-card:hover { transform: none; box-shadow: none; }
+  .soon-card .hand { font-family: var(--font-hand); font-size: 20px; color: var(--ink-soft); }
+  .soon-card p { margin-top: 8px; font-size: 14px; color: var(--ink-faint); }
+
+  .cta { padding: 72px 0 88px; text-align: center; }
+  .cta h2 { font-size: 30px; margin-bottom: 10px; }
+  .cta > p { color: var(--ink-soft); }
+  .cta-cards { margin-top: 28px; display: grid; grid-template-columns: 1fr 1fr; gap: 14px; text-align: left; }
+  .cta-item {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 18px 22px;
+    font-size: 14.5px;
+    transition: transform 0.18s ease-out, border-color 0.18s ease-out, box-shadow 0.18s ease-out;
+  }
+  .cta-item:hover {
+    transform: translateY(-3px);
+    border-color: rgba(196, 83, 47, 0.45);
+    box-shadow: var(--shadow-hover);
+  }
+  .cta-item .k { font-size: 12px; color: var(--ink-faint); margin-bottom: 4px; }
+  .cta-item .v { font-weight: 600; font-variant-numeric: tabular-nums; }
+  .footer-note { margin-top: 44px; font-size: 12.5px; color: var(--ink-faint); font-family: var(--font-hand); }
+
+  /* ═══ Lightbox ═══ */
+  .lightbox {
+    position: fixed; inset: 0; z-index: 50;
+    background: rgba(30, 25, 20, 0.88);
+    display: flex; align-items: center; justify-content: center;
+    padding: 24px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease-out;
+  }
+  .lightbox.open { opacity: 1; pointer-events: auto; }
+  .lightbox img {
+    max-width: 92vw; max-height: 88vh;
+    border-radius: 12px;
+    box-shadow: 0 24px 80px rgba(0, 0, 0, 0.4);
+    transform: scale(0.97);
+    transition: transform 0.2s ease-out;
+  }
+  .lightbox.open img { transform: none; }
+
+  /* ═══ 滚动浮现 + stagger ═══ */
+  .reveal, .reveal > * {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+  }
+  .reveal.on, .reveal.on > * { opacity: 1; transform: none; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .reveal, .reveal > * { opacity: 1; transform: none; transition: none; }
+    .squiggle path { stroke-dashoffset: 0; animation: none; }
+    .share-body { animation: none; }
+    .card, .practice-card, .mini-card, .cta-item, details.share-item { transition: none; }
+    .card:hover, .practice-card:hover, .mini-card:hover, .cta-item:hover { transform: none; }
+    html { scroll-behavior: auto; }
+  }
+
+  /* ═══ 手机端 ═══ */
+  @media (max-width: 640px) {
+    .hero { padding-top: 64px; }
+    .hero h1 { font-size: 32px; }
+    .grid, .coach-grid, .cta-cards { grid-template-columns: 1fr; }
+    .sec-title { font-size: 25px; }
+    .tl-photo.single-center { width: 88%; }
+    details.share-item summary { padding: 16px 18px; }
+    .share-body { padding: 0 18px 18px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ═══ Hero ═══ -->
+<header class="hero wrap">
+  <div class="hero-photo"><img src="images/avatar.jpg" alt="袁鑫杰头像"></div>
+  <h1>把 <span class="hl">AI</span> 变成<br>工作方式的人</h1>
+  <p class="sub">袁鑫杰 · AI 实践者 / 教练</p>
+  <p class="hand-note">0 技术背景起步，一个人运营一支 AI 团队</p>
+</header>
+
+<!-- ═══ 个人简介 ═══ -->
+<section class="wrap reveal">
+  <p class="kicker">关于我</p>
+  <h2 class="sec-title">个人简介</h2>
+  <svg class="squiggle" width="72" height="8" viewBox="0 0 72 8"><path d="M2 5 Q 12 1, 22 5 T 42 5 T 62 5 T 72 4" stroke="#C4532F" stroke-width="2" fill="none" stroke-linecap="round"/></svg>
+  <div class="card">
+    <p style="margin-bottom: 10px;">袁鑫杰，AI 实践者与企业 AI 落地教练。</p>
+    <ul class="intro-list">
+      <li><b>0 技术背景起步</b>，2 月时连「多模态」都不懂，半年后把 AI 变成自己的工作方式</li>
+      <li><b>日常以 AI Agent 为主力</b>，一个主 Agent 带着群里几个 AI 协作，一个人运营一支 AI 团队</li>
+      <li><b>亲自带教管理者从 0 学会 AI</b>，学员一周内从零基础到独立搭建 Agent</li>
+      <li><b>方法论做成开源技能库</b>（SkillHub），谁都能直接拿去用</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ═══ AI 实践 ═══ -->
+<section class="wrap reveal">
+  <p class="kicker">我在怎么用 AI</p>
+  <h2 class="sec-title">AI 实践</h2>
+  <svg class="squiggle" width="72" height="8" viewBox="0 0 72 8"><path d="M2 5 Q 12 1, 22 5 T 42 5 T 62 5 T 72 4" stroke="#C4532F" stroke-width="2" fill="none" stroke-linecap="round"/></svg>
+  <div class="grid">
+    <div class="practice-card">
+      <div class="num">01</div>
+      <h3>主 Agent 工作流</h3>
+      <p>Hermes 当主 Agent，群里 Kimi Code 写代码、TRAE 做开发、安全合规把关，各干各的活，一个人带着一支 AI 团队。</p>
+    </div>
+    <div class="practice-card">
+      <div class="num">02</div>
+      <h3>会议旁听 + Agent 跟进</h3>
+      <p>AI 静默旁听会议，自动产出纪要、识别待办、生成跟进日程，会议不再靠记。</p>
+    </div>
+    <div class="practice-card">
+      <div class="num">03</div>
+      <h3>飞书商务计算器</h3>
+      <p>智能识别价格信息秒级出报价，替代 3 张表格的手动流程。</p>
+    </div>
+    <div class="practice-card">
+      <div class="num">04</div>
+      <h3>客户动态监控</h3>
+      <p>每 2 小时全网搜客户动态极简推送，比客户更早知道行业变化。</p>
+    </div>
+    <div class="practice-card">
+      <div class="num">05</div>
+      <h3>个人知识图谱 / 第二大脑</h3>
+      <p>Obsidian 里攒了 30 多个深度概念主题，AI 每天陪读陪聊，读过的内容慢慢长成自己的认知。</p>
+    </div>
+    <div class="practice-card">
+      <div class="num">06</div>
+      <h3>零基础 AI 落地方法论</h3>
+      <p>四级楼梯（AI 自动→你问它答→数据给它→教它工作→搭工具）+ 6A 方法论，零基础客户不跳级落地。</p>
+    </div>
+    <div class="practice-card">
+      <div class="num">07</div>
+      <h3>SkillHub 开源</h3>
+      <p>高频 AI 玩法做成可复用技能，开源出来，团队和社区直接用。</p>
+    </div>
+    <div class="practice-card">
+      <div class="num">08</div>
+      <h3>本地部署大模型</h3>
+      <p>大模型直接部署在本机，断网也能跑，敏感数据不出设备。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ AI 教练 ═══ -->
+<section class="wrap reveal">
+  <p class="kicker">我也教别人用 AI</p>
+  <h2 class="sec-title">AI 教练</h2>
+  <svg class="squiggle" width="72" height="8" viewBox="0 0 72 8"><path d="M2 5 Q 12 1, 22 5 T 42 5 T 62 5 T 72 4" stroke="#C4532F" stroke-width="2" fill="none" stroke-linecap="round"/></svg>
+  <div class="coach-grid">
+    <div class="mini-card">
+      <h4>方法论 · 5 步框架</h4>
+      <div class="steps"><span>找场景</span><span>给手册</span><span>搭基建</span><span>先跑通</span><span>出数据</span></div>
+    </div>
+    <div class="mini-card">
+      <h4>核心公式</h4>
+      <p class="formula">AI 转型速度 = 个人利益绑定 × 使用门槛降低</p>
+      <p>动力解决"要不要做"，门槛解决"能不能做成"。</p>
+    </div>
+  </div>
+  <div class="mini-card" style="margin-top: 16px;">
+    <h4>教练哲学</h4>
+    <p>消除恐惧 + 即时正反馈（同一逻辑用于 AI 外语教练：安全区练习 + 即时反馈 + 隔日跟进）。</p>
+  </div>
+</section>
+
+<!-- ═══ 分享记录（折叠卡片）═══ -->
+<section class="wrap reveal">
+  <p class="kicker">去过哪里讲</p>
+  <h2 class="sec-title">分享记录</h2>
+  <svg class="squiggle" width="72" height="8" viewBox="0 0 72 8"><path d="M2 5 Q 12 1, 22 5 T 42 5 T 62 5 T 72 4" stroke="#C4532F" stroke-width="2" fill="none" stroke-linecap="round"/></svg>
+
+  <details class="share-item" open>
+    <summary>
+      <div class="t">
+        <h3>WeWork 中国 · AI 实践与分享</h3>
+        <p class="meta">约 200 人</p>
+      </div>
+      <span class="arrow" aria-hidden="true">▶</span>
+    </summary>
+    <div class="share-body">
+      <p class="desc">「AI 通识及行业应用」系列分享，特邀讲师。</p>
+      <div class="tl-photo"><img src="images/wework-share.jpg" alt="WeWork 中国分享现场"></div>
+      <div class="tl-photo single-center"><img src="images/wework-honor.jpg" alt="WeWork 中国荣誉讲师证书"></div>
+    </div>
+  </details>
+
+  <details class="share-item">
+    <summary>
+      <div class="t">
+        <h3>AFFT · AI 交流与答疑</h3>
+        <p class="meta">约 30 人 · 面向参赛学生</p>
+      </div>
+      <span class="arrow" aria-hidden="true">▶</span>
+    </summary>
+    <div class="share-body">
+      <p class="desc">面向参赛学生，聊 AI 怎么用在真实项目里，现场答疑。</p>
+    </div>
+  </details>
+
+  <details class="share-item">
+    <summary>
+      <div class="t">
+        <h3>亚洲商学院（广州）· 字节跳动组织管理 &amp; 飞书 AI</h3>
+        <p class="meta">30 位 CXO 高管</p>
+      </div>
+      <span class="arrow" aria-hidden="true">▶</span>
+    </summary>
+    <div class="share-body">
+      <p class="desc">面向 CXO 高管，讲字节跳动的组织管理与飞书 AI 实践。</p>
+      <div class="tl-photo"><img src="images/asia-business-school.jpg" alt="亚洲商学院分享现场"></div>
+    </div>
+  </details>
+
+  <details class="share-item">
+    <summary>
+      <div class="t">
+        <h3>南丰集团 · 管理层 AI 实践分享</h3>
+        <p class="meta">约 50 人 · 2026 年 5 月</p>
+      </div>
+      <span class="arrow" aria-hidden="true">▶</span>
+    </summary>
+    <div class="share-body">
+      <p class="desc">面向管理层，分享 AI 落地的真实路径与踩过的坑。</p>
+    </div>
+  </details>
+</section>
+
+<!-- ═══ 听众反馈 ═══ -->
+<section class="wrap reveal">
+  <p class="kicker">他们怎么说</p>
+  <h2 class="sec-title">听众反馈</h2>
+  <svg class="squiggle" width="72" height="8" viewBox="0 0 72 8"><path d="M2 5 Q 12 1, 22 5 T 42 5 T 62 5 T 72 4" stroke="#C4532F" stroke-width="2" fill="none" stroke-linecap="round"/></svg>
+  <div class="card">
+    <p style="font-size: 13.5px; color: var(--ink-faint); margin-bottom: 10px;">WeWork 中国场 · 18 份调研 · 满分 5 分</p>
+    <div class="rating-row"><span class="label">讲师</span><span class="stars">★★★★★</span><span class="score">5.0</span></div>
+    <div class="rating-row"><span class="label">课程</span><span class="stars">★★★★★</span><span class="score">5.0</span></div>
+    <div class="rating-row"><span class="label">组织</span><span class="stars">★★★★★</span><span class="score">5.0</span></div>
+    <div class="quote-list">
+      <div class="quote">自己可以做 AI 工具了</div>
+      <div class="quote">从非技术人员角度看到了 AI 的实际使用案例</div>
+      <div class="quote">学会了如何运用 AI 帮助自己工作</div>
+      <div class="quote">可以时刻看到客户公司的动态，提前准备应对棘手问题</div>
+    </div>
+    <p class="fav-title">最受欢迎案例</p>
+    <div class="fav-tags">
+      <span>客户动态监控</span><span>商务计算器</span><span>个人知识图谱 / 第二大脑</span><span>Agent 集群协作</span>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ Coming Soon ═══ -->
+<section class="wrap reveal">
+  <div class="card soon-card">
+    <p class="hand">Coming Soon</p>
+    <p>9–10 月 · 3 场线上直播（主题确认后更新）</p>
+  </div>
+</section>
+
+<!-- ═══ 联系方式 CTA ═══ -->
+<footer class="cta wrap reveal">
+  <h2>对 AI 落地感兴趣？</h2>
+  <p>约一次交流。</p>
+  <div class="cta-cards">
+    <a class="cta-item" href="mailto:kitsiu1211@hotmail.com">
+      <p class="k">邮箱</p>
+      <p class="v">kitsiu1211@hotmail.com</p>
+    </a>
+    <a class="cta-item" href="tel:+8613631236353">
+      <p class="k">电话 / 微信</p>
+      <p class="v">136 3123 6353</p>
+    </a>
+  </div>
+  <p class="footer-note">把 AI 变成工作方式的人 · 袁鑫杰</p>
+</footer>
+
+<!-- ═══ Lightbox ═══ -->
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="查看大图">
+  <img id="lightbox-img" src="" alt="">
+</div>
+
+<script>
+  // ── 滚动浮现 + 子元素 stagger（只动 transform/opacity）──
+  const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  document.querySelectorAll(".reveal").forEach((section) => {
+    [...section.children].forEach((child, i) => {
+      child.style.transitionDelay = reduced ? "0s" : `${i * 0.1}s`;
+    });
+  });
+  const io = new IntersectionObserver((entries) => {
+    for (const e of entries) {
+      if (e.isIntersecting) {
+        e.target.classList.add("on");
+        io.unobserve(e.target);
+      }
+    }
+  }, { threshold: 0.08 });
+  document.querySelectorAll(".reveal").forEach((el) => io.observe(el));
+
+  // ── Lightbox：点击案例图全屏放大 ──
+  const lightbox = document.getElementById("lightbox");
+  const lightboxImg = document.getElementById("lightbox-img");
+  function openLightbox(img) {
+    lightboxImg.src = img.src;
+    lightboxImg.alt = img.alt;
+    lightbox.classList.add("open");
+    document.body.style.overflow = "hidden";
+  }
+  function closeLightbox() {
+    lightbox.classList.remove("open");
+    document.body.style.overflow = "";
+  }
+  document.querySelectorAll(".tl-photo img").forEach((img) => {
+    img.addEventListener("click", () => openLightbox(img));
+  });
+  lightbox.addEventListener("click", closeLightbox);
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && lightbox.classList.contains("open")) closeLightbox();
+  });
+</script>
+</body>
+</html>
