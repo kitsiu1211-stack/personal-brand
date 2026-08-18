@@ -156,6 +156,13 @@
     color: var(--ink-soft);
   }
 
+  /* ═══ 服务区 ═══ */
+  .service-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 16px; }
+  .service-card { display: flex; flex-direction: column; }
+  .service-card h3 { font-size: 18px; margin-bottom: 4px; }
+  .service-card .meta { font-size: 12.5px; color: var(--ink-faint); font-family: var(--font-hand); margin-bottom: 8px; }
+  .service-card p { font-size: 14px; color: var(--ink-soft); line-height: 1.7; }
+
   /* ═══ 分享记录（折叠卡片）═══ */
   details.share-item {
     background: var(--card);
@@ -321,7 +328,7 @@
   @media (max-width: 640px) {
     .hero { padding-top: 64px; }
     .hero h1 { font-size: 32px; }
-    .grid, .coach-grid, .cta-cards { grid-template-columns: 1fr; }
+    .grid, .coach-grid, .cta-cards, .service-grid { grid-template-columns: 1fr; }
     .sec-title { font-size: 25px; }
     .tl-photo.single-center { width: 88%; }
     details.share-item summary { padding: 16px 18px; }
@@ -423,6 +430,30 @@
   <div class="mini-card" style="margin-top: 16px;">
     <h4>教练哲学</h4>
     <p>消除恐惧 + 即时正反馈（同一逻辑用于 AI 外语教练，安全区练习 + 即时反馈 + 隔日跟进）。</p>
+  </div>
+</section>
+
+<!-- ═══ 服务 ═══ -->
+<section class="wrap reveal">
+  <p class="kicker">怎么合作</p>
+  <h2 class="sec-title">服务</h2>
+  <svg class="squiggle" width="72" height="8" viewBox="0 0 72 8"><path d="M2 5 Q 12 1, 22 5 T 42 5 T 62 5 T 72 4" stroke="#C4532F" stroke-width="2" fill="none" stroke-linecap="round"/></svg>
+  <div class="service-grid">
+    <div class="card service-card">
+      <h3>主题分享</h3>
+      <p class="meta">45-60 分钟 · 线上或线下</p>
+      <p>给企业团队讲 AI 怎么落地，主题可以按你们的场景定制，讲完留 Q&amp;A。</p>
+    </div>
+    <div class="card service-card">
+      <h3>场景共建</h3>
+      <p class="meta">1-2 周 · 和你的团队一起</p>
+      <p>挑一个具体的业务场景，把 AI 方案搭起来，交付能直接用的工具或流程，不是讲完就走。</p>
+    </div>
+    <div class="card service-card">
+      <h3>AI 咨询</h3>
+      <p class="meta">1 小时 · 一对一或小团队</p>
+      <p>诊断式对话，聊清现状和卡点，给你一条能走的落地路径。</p>
+    </div>
   </div>
 </section>
 
